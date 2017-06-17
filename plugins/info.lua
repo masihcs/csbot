@@ -49,15 +49,15 @@ local function info_cb(arg, data)
   local um_hash = 'msgs:'..data.id_..':'..arg.chat_id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
-  text = text..'@BeyondTeam'
-  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "md")
+  text = text..'@CyberStormTeam'
+  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "@CyberStormTeam")
 end
 tdcli_function ({
     ID = "GetUser",
     user_id_ = data.sender_user_id_
   }, info_cb, {chat_id=data.chat_id_,user_id=data.sender_user_id_,msgid=data.id_})
     else
-tdcli.sendMessage(data.chat_id_, "", 0, "*User not found*", 0, "md")
+tdcli.sendMessage(data.chat_id_, "", 0, "*User not found*", 0, "@CyberStormTeam")
    end
 end
 
@@ -100,9 +100,9 @@ local function info_by_username(arg, data)
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
   text = text..'@BeyondTeam'
-  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "md")
+  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "@CyberStormTeam")
    else
-   tdcli.sendMessage(arg.chat_id, "", 0, "*User not found*", 0, "md")
+   tdcli.sendMessage(arg.chat_id, "", 0, "*User not found*", 0, "@CyberStormTeam")
   end
 end
 
@@ -145,9 +145,9 @@ local function info_by_id(arg, data)
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
   text = text..'@BeyondTeam'
-  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "md")
+  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "@CyberStormTeam")
    else
-   tdcli.sendMessage(arg.chat_id, "", 0, "*User not found*", 0, "md")
+   tdcli.sendMessage(arg.chat_id, "", 0, "*User not found*", 0, "@CyberStormTeam")
    end
 end
 
@@ -218,7 +218,7 @@ local function info2_cb(arg, data)
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
   text = text..'@BeyondTeam'
-  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "md")
+  tdcli.sendMessage(arg.chat_id, arg.msgid, 0, text, 0, "@CyberStormTeam")
    end
 end
 tdcli_function ({
