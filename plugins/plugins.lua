@@ -69,7 +69,7 @@ local function list_plugins(only_enabled, msg)
     end
   end
   text = "\n_🔃All Plugins Reloaded_\n\n"..nact.." *✔️Plugins Enabled*\n"..nsum.." *📂Plugins Installed*\n"..msg_caption
-  tdcli.sendMessage(msg.to.id, msg.id_, 1, text, 1, 'md')
+  tdcli.sendMessage(msg.to.id, msg.id_, 1, text, 1, '@CyberStormTeam')
 end
 
 local function reload_plugins(checks, msg)
