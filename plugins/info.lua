@@ -1,5 +1,5 @@
---Begin info.lua By @SoLiD
-local Solid = 157059515
+--Begin info.lua By @masihking79
+local Solid = 398312272
 local function setrank(msg, user_id, value,chat_id)
   local hash = nil
 
@@ -7,7 +7,7 @@ local function setrank(msg, user_id, value,chat_id)
 
   if hash then
     redis:hset(hash, user_id, value)
-  return tdcli.sendMessage(chat_id, '', 0, '_set_ *Rank* _for_ *[ '..user_id..' ]* _To :_ *'..value..'*', 0, "md")
+  return tdcli.sendMessage(chat_id, '', 0, '_set_ *Rank* _for_ *[ '..user_id..' ]* _To :_ *'..value..'*', 0, "@CyberStormTeam")
   end
 end
 local function info_by_reply(arg, data)
