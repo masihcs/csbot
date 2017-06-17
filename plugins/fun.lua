@@ -66,18 +66,18 @@ local function get_weather(location)
 	local weather = json:decode(b)
 	local city = weather.name
 	local country = weather.sys.country
-	local temp = 'دمای شهر '..city..' هم اکنون '..weather.main.temp..' درجه سانتی گراد می باشد\n____________________'
-	local conditions = 'شرایط فعلی آب و هوا : '
+	local temp = 'دماي شهر '..city..' هم اکنون '..weather.main.temp..' درجه سانتي گراد مي باشد\n____________________'
+	local conditions = 'شرايط فعلي آب و هوا : '
 	if weather.weather[1].main == 'Clear' then
-		conditions = conditions .. 'آفتابی☀'
+		conditions = conditions .. 'آفتابي?'
 	elseif weather.weather[1].main == 'Clouds' then
-		conditions = conditions .. 'ابری ☁☁'
+		conditions = conditions .. 'ابري ??'
 	elseif weather.weather[1].main == 'Rain' then
-		conditions = conditions .. 'بارانی ☔'
+		conditions = conditions .. 'باراني ?'
 	elseif weather.weather[1].main == 'Thunderstorm' then
-		conditions = conditions .. 'طوفانی ☔☔☔☔'
+		conditions = conditions .. 'طوفاني ????'
 	elseif weather.weather[1].main == 'Mist' then
-		conditions = conditions .. 'مه 💨'
+		conditions = conditions .. 'مه ??'
 	end
 	return temp .. '\n' .. conditions
 end
@@ -125,14 +125,14 @@ end
 function run(msg, matches) 
 local Chash = "cmd_lang:"..msg.to.id
 local Clang = redis:get(Chash)
-	if (matches[1]:lower() == 'calc' and not Clang) or (matches[1]:lower() == 'ماشین حساب' and Clang) and matches[2] then 
+	if (matches[1]:lower() == 'calc' and not Clang) or (matches[1]:lower() == 'ماشين حساب' and Clang) and matches[2] then 
 		if msg.to.type == "pv" then 
 			return 
        end
 		return calc(matches[2])
 	end
 --------------------------------
-	if (matches[1]:lower() == 'praytime' and not Clang) or (matches[1]:lower() == 'ساعات شرعی' and Clang) then
+	if (matches[1]:lower() == 'praytime' and not Clang) or (matches[1]:lower() == 'ساعات شرعي' and Clang) then
 		if matches[2] then
 			city = matches[2]
 		elseif not matches[2] then
@@ -154,7 +154,7 @@ local Clang = redis:get(Chash)
 		return tdcli.sendMessage(msg.chat_id_, 0, 1, text, 1, 'html')
 	end
 --------------------------------
-	if (matches[1]:lower() == 'tophoto' and not Clang) or (matches[1]:lower() == 'تبدیل به عکس' and Clang) and msg.reply_id then
+	if (matches[1]:lower() == 'tophoto' and not Clang) or (matches[1]:lower() == 'تبديل به عکس' and Clang) and msg.reply_id then
 		function tophoto(arg, data)
 			function tophoto_cb(arg,data)
 				if data.content_.sticker_ then
@@ -171,7 +171,7 @@ local Clang = redis:get(Chash)
 						os.rename(file, pfile)
 						tdcli.sendPhoto(msg.to.id, 0, 0, 1, nil, pfile, msg_caption, dl_cb, nil)
 					else
-						tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This sticker does not exist. Send sticker again._'..msg_caption, 1, 'md')
+						tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This sticker does not exist. Send sticker again._'..msg_caption, 1, '@CyberStormTeam')
 					end
 				else
 					tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This is not a sticker._', 1, 'md')
@@ -182,7 +182,7 @@ local Clang = redis:get(Chash)
 		tdcli_function ({ ID = 'GetMessage', chat_id_ = msg.chat_id_, message_id_ = msg.reply_id }, tophoto, nil)
     end
 --------------------------------
-	if (matches[1]:lower() == 'tosticker' and not Clang) or (matches[1]:lower() == 'تبدیل به استیکر' and Clang) and msg.reply_id then
+	if (matches[1]:lower() == 'tosticker' and not Clang) or (matches[1]:lower() == 'تبديل به استيکر' and Clang) and msg.reply_id then
 		function tosticker(arg, data)
 			function tosticker_cb(arg,data)
 				if data.content_.ID == 'MessagePhoto' then
@@ -193,10 +193,10 @@ local Clang = redis:get(Chash)
 						os.rename(pathf, pfile)
 						tdcli.sendDocument(msg.chat_id_, 0, 0, 1, nil, pfile, msg_caption, dl_cb, nil)
 					else
-						tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This photo does not exist. Send photo again._', 1, 'md')
+						tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This photo does not exist. Send photo again._', 1, '@CyberStormTeam')
 					end
 				else
-					tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This is not a photo._', 1, 'md')
+					tdcli.sendMessage(msg.to.id, msg.id_, 1, '_This is not a photo._', 1, '@CyberStormTeam')
 				end
 			end
 			tdcli_function ({ ID = 'GetMessage', chat_id_ = msg.chat_id_, message_id_ = data.id_ }, tosticker_cb, nil)
@@ -208,7 +208,7 @@ local Clang = redis:get(Chash)
 		city = matches[2]
 		local wtext = get_weather(city)
 		if not wtext then
-			wtext = 'مکان وارد شده صحیح نیست'
+			wtext = 'مکان وارد شده صحيح نيست'
 		end
 		return wtext
 	end
@@ -227,7 +227,7 @@ local Clang = redis:get(Chash)
 
 	end
 --------------------------------
-	if (matches[1]:lower() == 'voice' and not Clang) or (matches[1]:lower() == 'تبدیل به صدا' and Clang) then
+	if (matches[1]:lower() == 'voice' and not Clang) or (matches[1]:lower() == 'تبديل به صدا' and Clang) then
  local text = matches[2]
     textc = text:gsub(' ','.')
     
@@ -247,7 +247,7 @@ end
 		return 'زبان : '..data.lang..'\nترجمه : '..data.text[1]..'\n____________________'..msg_caption
 	end
 --------------------------------
-	if (matches[1]:lower() == 'short' and not Clang) or (matches[1]:lower() == 'لینک کوتاه' and Clang) then
+	if (matches[1]:lower() == 'short' and not Clang) or (matches[1]:lower() == 'لينک کوتاه' and Clang) then
 		if matches[2]:match("[Hh][Tt][Tt][Pp][Ss]://") then
 			shortlink = matches[2]
 		elseif not matches[2]:match("[Hh][Tt][Tt][Pp][Ss]://") then
@@ -259,11 +259,11 @@ end
 		local data = json:decode(bitly)
 		local u2s = http.request('http://u2s.ir/?api=1&return_text=1&url='..URL.escape(shortlink))
 		local llink = http.request('http://llink.ir/yourls-api.php?signature=a13360d6d8&action=shorturl&url='..URL.escape(shortlink)..'&format=simple')
-		local text = ' 🌐لینک اصلی :\n'..check_markdown(data.data.long_url)..'\n\nلینکهای کوتاه شده با 6 سایت کوتاه ساز لینک : \n》کوتاه شده با bitly :\n___________________________\n'..(check_markdown(data.data.url) or '---')..'\n___________________________\n》کوتاه شده با u2s :\n'..(check_markdown(u2s) or '---')..'\n___________________________\n》کوتاه شده با llink : \n'..(check_markdown(llink) or '---')..'\n___________________________\n》لینک کوتاه شده با yon : \nyon.ir/'..(check_markdown(jdat.output) or '---')..'\n____________________'..msg_caption
+		local text = ' ??لينک اصلي :\n'..check_markdown(data.data.long_url)..'\n\nلينکهاي کوتاه شده با 6 سايت کوتاه ساز لينک : \n?کوتاه شده با bitly :\n___________________________\n'..(check_markdown(data.data.url) or '---')..'\n___________________________\n?کوتاه شده با u2s :\n'..(check_markdown(u2s) or '---')..'\n___________________________\n?کوتاه شده با llink : \n'..(check_markdown(llink) or '---')..'\n___________________________\n?لينک کوتاه شده با yon : \nyon.ir/'..(check_markdown(jdat.output) or '---')..'\n____________________'..msg_caption
 		return tdcli.sendMessage(msg.chat_id_, 0, 1, text, 1, 'html')
 	end
 --------------------------------
-	if (matches[1]:lower() == 'sticker' and not Clang) or (matches[1]:lower() == 'استیکر' and Clang) then
+	if (matches[1]:lower() == 'sticker' and not Clang) or (matches[1]:lower() == 'استيکر' and Clang) then
 		local eq = URL.escape(matches[2])
 		local w = "500"
 		local h = "500"
@@ -314,7 +314,7 @@ local hash = "gp_lang:"..msg.to.id
 local lang = redis:get(hash)
 if not lang then
 helpfun_en = [[
-_Beyond Reborn Fun Help Commands:_
+_cyber storm Fun Help Commands:_
 
 *!time*
 _Get time in a sticker_
@@ -357,51 +357,51 @@ _You can use_ *[!/#]* _at the beginning of commands._
 else
 
 helpfun_en = [[
-_راهنمای فان ربات بیوند:_
+_راهنماي فان ربات سايبر استورم:_
 
 *!time*
-_دریافت ساعت به صورت استیکر_
+_دريافت ساعت به صورت استيکر_
 
 *!short* `[link]`
-_کوتاه کننده لینک_
+_کوتاه کننده لينک_
 
 *!voice* `[text]`
-_تبدیل متن به صدا_
+_تبديل متن به صدا_
 
 *!tr* `[lang]` `[word]`
-_ترجمه متن فارسی به انگلیسی وبرعکس_
+_ترجمه متن فارسي به انگليسي وبرعکس_
 _مثال:_
 _!tr en سلام_
 
 *!sticker* `[word]`
-_تبدیل متن به استیکر_
+_تبديل متن به استيکر_
 
 *!photo* `[word]`
-_تبدیل متن به عکس_
+_تبديل متن به عکس_
 
 *!calc* `[number]`
-_ماشین حساب_
+_ماشين حساب_
 
 *!praytime* `[city]`
-_اعلام ساعات شرعی_
+_اعلام ساعات شرعي_
 
 *!tosticker* `[reply]`
-_تبدیل عکس به استیکر_
+_تبديل عکس به استيکر_
 
 *!tophoto* `[reply]`
-_تبدیل استیکر‌به عکس_
+_تبديل استيکر‌به عکس_
 
 *!weather* `[city]`
-_دریافت اب وهوا_
+_دريافت اب وهوا_
 
-*شما میتوانید از [!/#] در اول دستورات برای اجرای آنها بهره بگیرید*
+*شما ميتوانيد از [!/#] در اول دستورات براي اجراي آنها بهره بگيريد*
 
-موفق باشید ;)]]
+موفق باشيد ;)]]
 end
 return helpfun_en..msg_caption
 end
 
-if matches[1] == "راهنمای سرگرمی" and Clang then
+if matches[1] == "راهنماي سرگرمي" and Clang then
 local hash = "gp_lang:"..msg.to.id
 local lang = redis:get(hash)
 if not lang then
@@ -411,10 +411,10 @@ _Beyond Reborn Fun Help Commands:_
 *ساعت*
 _Get time in a sticker_
 
-*لینک کوتاه* `[لینک]`
+*لينک کوتاه* `[لينک]`
 _Make short url_
 
-*تبدیل به صدا* `[متن]`
+*تبديل به صدا* `[متن]`
 _Convert text to voice_
 
 *ترجمه* `[زبان] [کلمه]`
@@ -422,22 +422,22 @@ _Translates FA to EN and EN to FA_
 _Example:_
 *ترجمه hi fa*
 
-*استیکر* `[متن]`
+*استيکر* `[متن]`
 _Convert text to sticker_
 
 *عکس* `[متن]`
 _Convert text to photo_
 
-*ماشین حساب* `[معادله]`
+*ماشين حساب* `[معادله]`
 Calculator
 
-*ساعات شرعی* `[شهر]`
+*ساعات شرعي* `[شهر]`
 _Get Patent (Pray Time)_
 
-*تبدیل به استیکر* `[ریپلی]`
+*تبديل به استيکر* `[ريپلي]`
 _Convert photo to sticker_
 
-*تبدیل به عکس* `[ریپلی]`
+*تبديل به عکس* `[ريپلي]`
 _Convert text to photo_
 
 *اب و هوا* `[شهر]`
@@ -447,44 +447,44 @@ _Get weather_
 else
 
 helpfun_fa = [[
-_راهنمای فان ربات بیوند:_
+_راهنماي فان ربات بيوند:_
 
 *ساعت*
-_دریافت ساعت به صورت استیکر_
+_دريافت ساعت به صورت استيکر_
 
-*لینک کوتاه* `[لینک]`
-_کوتاه کننده لینک_
+*لينک کوتاه* `[لينک]`
+_کوتاه کننده لينک_
 
-*تبدیل به صدا* `[متن]`
-_تبدیل متن به صدا_
+*تبديل به صدا* `[متن]`
+_تبديل متن به صدا_
 
 *ترجمه* `[زبان]` `[متن]`
-_ترجمه متن فارسی به انگلیسی وبرعکس_
+_ترجمه متن فارسي به انگليسي وبرعکس_
 _مثال:_
 _ترجمه en سلام_
 
-*استیکر* `[متن]`
-_تبدیل متن به استیکر_
+*استيکر* `[متن]`
+_تبديل متن به استيکر_
 
-*استیکر* `[متن]`
-_تبدیل متن به عکس_
+*استيکر* `[متن]`
+_تبديل متن به عکس_
 
-*ماشین حساب* `[معادله]`
-_ماشین حساب_
+*ماشين حساب* `[معادله]`
+_ماشين حساب_
 
-*ساعات شرعی* `[شهر]`
-_اعلام ساعات شرعی_
+*ساعات شرعي* `[شهر]`
+_اعلام ساعات شرعي_
 
-*تبدیل به استیکر* `[ریپلی]`
-_تبدیل عکس به استیکر_
+*تبديل به استيکر* `[ريپلي]`
+_تبديل عکس به استيکر_
 
-*تبدیل به عکس* `[ریپلی]`
-_تبدیل استیکر‌به عکس_
+*تبديل به عکس* `[ريپلي]`
+_تبديل استيکر‌به عکس_
 
 *اب و هوا* `[شهر]`
-_دریافت اب وهوا_
+_دريافت اب وهوا_
 
-موفق باشید ;)]]
+موفق باشيد ;)]]
 end
 return helpfun_fa..msg_caption
 end
@@ -506,21 +506,21 @@ return {
 		"^[!/]([Ss]hort) (.*)$",
 		"^[!/](photo) (.+)$",
 		"^[!/](sticker) (.+)$",
-      "^(راهنمای سرگرمی)$",
+      "^(راهنماي سرگرمي)$",
     	"^(اب و هوا) (.*)$",
-		"^(ماشین حساب) (.*)$",
+		"^(ماشين حساب) (.*)$",
 		"^(ساعت)$",
-		"^(تبدیل به عکس)$",
-		"^(تبدیل به استیکر)$",
-		"^(تبدیل به صدا) +(.*)$",
-		"^(ساعات شرعی) (.*)$",
-		"^(ساعات شرعی)$",
+		"^(تبديل به عکس)$",
+		"^(تبديل به استيکر)$",
+		"^(تبديل به صدا) +(.*)$",
+		"^(ساعات شرعي) (.*)$",
+		"^(ساعات شرعي)$",
 		"^(ترجمه) ([^%s]+) (.*)$",
-		"^(لینک کوتاه) (.*)$",
-		"^(عکس) (.+)$",
-		"^(استیکر) (.+)$"
+		"^(لينک کوتاه) (.*)$",
+		"^[!/](عکس) (.+)$",
+		"^[!/](استيکر) (.+)$"
 		}, 
 	run = run,
 	}
 
---#by @BeyondTeam :)
+--#by @CyberStormTeam :)
